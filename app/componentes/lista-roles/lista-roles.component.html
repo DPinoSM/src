@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="title">
+    <h4>Listado de Roles</h4>
+    <button type="button" class="btn btn-primary"routerLink="/add">Agregar Rol</button>
+  </div>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-success" *ngFor="let rol of roles">
+        <td>{{ rol.nombre_rol }}</td>
+        <td>
+          <a [routerLink]="['/edit', rol.id_rol]">
+            <button type="button" class="btn btn-warning btn-sm">Edit</button>
+          </a>
+          <button type="button" class="btn btn-danger btn-sm ms-3">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>
+
+
