@@ -13,7 +13,6 @@ import { LoginComponent } from './componentes/login/login.component';
 import { AdminComponent } from './componentes/admin/admin.component';
 import { InicioComponent } from './componentes/inicio/iniciocomponent';
 import { CrudUsuariosComponent } from './Services/crud-usuarios/crud-usuarios.component';
-import { CrudRolesComponent } from './Services/crud-roles/crud-roles.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { ListaRolesComponent } from './componentes/lista-roles/lista-roles.component';
 import { AddEditRolesComponent } from './componentes/add-edit-roles/add-edit-roles.component';
@@ -27,7 +26,6 @@ import { RolComponent } from './componentes/rol/rol.component'
     AdminComponent,
     InicioComponent,
     CrudUsuariosComponent,
-    CrudRolesComponent,
     NavbarComponent,
     ListaRolesComponent,
     AddEditRolesComponent,

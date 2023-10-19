@@ -5,14 +5,14 @@
         <div class="card text-white bg-secondary mb-3" style="max-width: 25rem;">
             <div class="card-header text-center">Agregar Rol</div>
             <div class="card-body">
-                <form>
+                <form (submit)="createNewRol($event)">
                     <input type="text" class="form-control mt-4" [(ngModel)]="newRolData.nombre_rol" placeholder="Ingrese nombre">
                     <div class="row mt-2 text-center">
                         <div class="col-lg-6">
                             <button routerLink="/rol" type="button" class="btn btn-danger mt-3">Volver</button>
                         </div>
                         <div class="col-lg-6">
-                            <button (click)="createNewRol()" class="btn btn-primary mt-3">Aceptar</button>
+                            <button type="submit" class="btn btn-primary mt-3">Aceptar</button>
                         </div>
                     </div>
                 </form>

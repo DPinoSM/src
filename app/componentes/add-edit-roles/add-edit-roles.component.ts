@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RolService } from '../../Services/rol.service';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -8,18 +8,15 @@ import { catchError } from 'rxjs/operators';
   templateUrl: './add-edit-roles.component.html',
   styleUrls: ['./add-edit-roles.component.css']
 })
-export class AddEditRolesComponent{
+export class AddEditRolesComponent implements OnInit {
   roles: any[] = [];
   newRolData: any;
-  selectedRol: any; // Propiedad para el rol seleccionado
+
   private rolesSubscription!: Subscription;
 
   constructor(private rolService: RolService) {
-    this.newRolData = {
-      id_rol: '',
-      nombre_rol: '',
-    };
-  }
+    this.newRolData = {};
+    }
 
   ngOnInit(): void {
     this.getRoles();
@@ -34,6 +31,7 @@ export class AddEditRolesComponent{
       .pipe(
         catchError(error => {
           console.error('Error al obtener roles:', error);
+          // Aquí podrías mostrar un mensaje de error al usuario o realizar otras acciones apropiadas
           return [];
         })
       )
@@ -42,15 +40,20 @@ export class AddEditRolesComponent{
       });
   }
 
-  // Método para crear un nuevo rol
-  createNewRol() {
-    this.rolService.createRol(this.newRolData).subscribe((response: any) => {
-      if (response.msg) {
-        console.log('Mensaje del servidor:', response.msg);
-        this.getRoles(); // Actualizar la lista de roles
-      }
-    });
+  createNewRol(event: Event) {
+    event.preventDefault(); // Evita la recarga de la página
+  
+    if (this.newRolData.nombre_rol.trim() !== '') {
+      this.rolService.createRol(this.newRolData).subscribe((response: any) => {
+        if (response.msg) {
+          console.log('Mensaje del servidor:', response.msg);
+          this.getRoles(); // Actualizar la lista de roles
+          this.newRolData.nombre_rol = ''; // Restablece el campo después de crear el rol
+        }
+      });
+    } else {
+      // Puedes mostrar un mensaje de error al usuario indicando que el nombre del rol es obligatorio.
+    }
   }
-
-
+  
 }

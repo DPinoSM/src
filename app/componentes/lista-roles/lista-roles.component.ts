@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RolService } from '../../Services/rol.service';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 @Component({
   selector: 'app-lista-roles',
   templateUrl: './lista-roles.component.html',
   styleUrls: ['./lista-roles.component.css']
 })
-export class ListaRolesComponent {
+export class ListaRolesComponent implements OnInit {
 
   roles: any[] = [];
   newRolData: any;
-  selectedRol: any; // Propiedad para el rol seleccionado
   private rolesSubscription!: Subscription;
 
   constructor(private rolService: RolService) {
@@ -34,6 +34,7 @@ export class ListaRolesComponent {
       .pipe(
         catchError(error => {
           console.error('Error al obtener roles:', error);
+          // Aquí podrías mostrar un mensaje de error al usuario o realizar otras acciones apropiadas
           return [];
         })
       )
@@ -47,11 +48,9 @@ export class ListaRolesComponent {
     this.rolService.updateRol(id, updatedData).subscribe((response: any) => {
       if (response.msg) {
         console.log('Mensaje del servidor:', response.msg);
-        this.getRoles(); // Actualizar la lista de role
-        updatedData.nombre = ''; 
-        updatedData.descripcion = '';
+        this.getRoles(); // Actualizar la lista de roles
+        updatedData.nombre_rol = ''; // Asegúrate de utilizar el mismo nombre de propiedad
       }
     });
   }
-
 }
